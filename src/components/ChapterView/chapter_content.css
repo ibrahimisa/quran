@@ -1,0 +1,9 @@
+/* credit: https://stackoverflow.com/questions/57606651/convert-english-numbers-to-arabic-text-using-javascript */
+@font-face {
+    font-family: arabic-font;
+    src: url(arabic_font.otf);
+}
+
+/* div{
+    font-family: "arabic-font";
+} */

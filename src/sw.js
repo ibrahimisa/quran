@@ -1,0 +1,1 @@
+const contentsToCache = ["/index.html", "/arabic_font.otf", "/"]
