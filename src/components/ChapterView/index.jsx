@@ -1,4 +1,4 @@
-import React, { useState, Component } from "react";
+import React, { useState, useEffect } from "react";
 import backArrow from "./arrow.png";
 import ChapterHeading from "./ChapterHeading";
 import ChapterContent from "./ChapterContent";
@@ -7,94 +7,83 @@ import Translation from "./Translation";
 import { Card, Col } from "react-bootstrap";
 import ReactLoader from "react-loader";
 import axios from "axios";
-import { ViewChapterConsumer } from "../../viewChapterContext";
+import { Link, useParams } from 'react-router-dom';
 
-class ChapterView extends Component {
-  constructor(props) {
-    super(props);
+function ChapterView() {
+  const [chapterData, setChapterData] = useState({});
+  const [loaded, setLoaded] = useState(false);
 
-    this.state = {
-      chapterData: {},
-      loaded: false,
-    };
-  }
+  const { heading, verses, recitations, translations } = chapterData;
+  const chapterId = useParams().chapterId;
 
-  componentDidMount() {
-    this.fetchChapterData().then((chapterData) =>
-      this.setState({ chapterData, loaded: true })
-    );
-  }
-
-  fetchChapterData = async () => {
+  const fetchChapterData = async () => {
     const chapterData = {};
     let response = null;
 
-    // https://api.quran.com/api/v4/chapters/${this.props.id}?language=en
-    response = await axios.get(`chapter.json`);
+    response = await axios.get(
+      `https://api.quran.com/api/v4/chapters/${chapterId}?language=en`
+    );
     chapterData.heading = response.data.chapter;
 
-    // https://api.quran.com/api/v4/quran/verses/uthmani?chapter_number=${this.props.id}
-    response = await axios.get(`verses.json`);
+    response = await axios.get(
+      `https://api.quran.com/api/v4/quran/verses/uthmani?chapter_number=${chapterId}`
+    );
     chapterData.verses = response.data.verses;
 
-    // https://api.quran.com/api/v4/resources/recitations?language=en
-    response = await axios.get("recitations.json");
+    response = await axios.get(
+      'https://api.quran.com/api/v4/resources/recitations?language=en'
+    );
     chapterData.recitations = response.data.recitations;
 
-    // https://api.quran.com/api/v4/resources/translations
-    response = await axios.get("translations.json");
+    response = await axios.get(
+      'https://api.quran.com/api/v4/resources/translations'
+    );
     chapterData.translations = response.data.translations;
 
     return chapterData;
   };
 
-  render() {
-    const { heading, verses, recitations, translations } =
-      this.state.chapterData;
-    const loaded = this.state.loaded;
+  useEffect(() => {
+    fetchChapterData().then((chapterData) => {
+      setChapterData(chapterData);
+      setLoaded(true);
+    });
+  }, []);
 
-    return (
-      <div>
-        <ViewChapterConsumer>
-          {(viewChapter) => {
-            // viewChapter(0) means go back to home
-            return (
-              <div style={{ cursor: "pointer" }} onClick={() => viewChapter(0)}>
-                <img
-                  src={backArrow}
-                  alt="back to home arrow"
-                  style={{ width: "30px" }}
-                />
-              </div>
-            );
-          }}
-        </ViewChapterConsumer>
-        <ReactLoader loaded={loaded}>
-          <div className="pt-3">
-            <Card>
-              <Card.Header>
-                <ChapterHeading heading={heading} />
-              </Card.Header>
-              <Card.Body>
-                <ChapterContent verses={verses} />
-                <Translation
-                  translations={translations}
-                  numberOfVerses={verses?.length}
-                  chapterId={this.props.id}
-                />
-              </Card.Body>
-              <Card.Footer>
-                <AudioRecitation
-                  recitations={recitations}
-                  chapterId={this.props.id}
-                />
-              </Card.Footer>
-            </Card>
-          </div>
-        </ReactLoader>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Link to='/'>
+        <img
+          src={backArrow}
+          alt='back to home arrow'
+          style={{ width: '30px' }}
+        />
+      </Link>
+      <ReactLoader loaded={loaded}>
+        <div className='pt-3'>
+          <Card>
+            <Card.Header>
+              <ChapterHeading heading={heading} />
+            </Card.Header>
+            <Card.Body>
+              <ChapterContent verses={verses} />
+              <Translation
+                translations={translations}
+                numberOfVerses={verses?.length}
+                chapterId={chapterId}
+              />
+            </Card.Body>
+            <Card.Footer>
+              <AudioRecitation
+                recitations={recitations}
+                chapterId={chapterId}
+              />
+            </Card.Footer>
+          </Card>
+        </div>
+      </ReactLoader>
+    </div>
+  );
 }
 
 export default ChapterView;

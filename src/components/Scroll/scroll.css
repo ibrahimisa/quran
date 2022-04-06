@@ -5,7 +5,6 @@
 
                     .container__content {
                         /* Height */
-                        height: 400px;
 
                         /* Scrollable */
                         overflow-y: scroll;

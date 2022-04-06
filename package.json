@@ -2,7 +2,7 @@
   "name": "quran",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --host",
+    "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -12,7 +12,8 @@
     "react": "^17.0.2",
     "react-bootstrap": "^2.1.2",
     "react-dom": "^17.0.2",
-    "react-loader": "^2.4.7"
+    "react-loader": "^2.4.7",
+    "react-router-dom": "^6.3.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^1.0.7",

@@ -6,7 +6,7 @@ import ReactLoader from "react-loader";
 function Chapters({ chapters }) {
   const loaded = !!chapters.length;
   return (
-    <Scroll>
+    <Scroll style={{height: '400px'}}>
       <ReactLoader loaded={loaded}>
         {chapters.map((chapter) => (
           <Chapter

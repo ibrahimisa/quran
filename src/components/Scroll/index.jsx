@@ -1,13 +1,13 @@
 import React from 'react';
 import "./scroll.css";
 
-function Scroll({children}) {
-  return (<div class="container">
-    <div class="container__content">
+function Scroll({children, style}) {
+  return (<div className="container">
+    <div className="container__content" style={style}>
         {children}
     </div>
 
-    <div class="container__fading"></div>
+    <div className="container__fading"></div>
 </div>);
 }
 
