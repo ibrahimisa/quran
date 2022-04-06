@@ -21,7 +21,7 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/chapters.json').then((response) => {
+    axios.get('https://api.quran.com/api/v4/chapters').then((response) => {
       this.allChapters = response.data.chapters;
       this.setState({ chapters: response.data.chapters });
     });
