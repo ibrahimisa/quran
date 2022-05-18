@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
-import { Modal } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import infoIcon from './info.png';
 import infoHover from './info-hover.png';
+import Scroll from '../../Scroll'
 import axios from 'axios';
 
 function Info({ style, id, name }) {
@@ -33,15 +34,23 @@ function Info({ style, id, name }) {
           <Modal.Title>{name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p ref={infoTextRef}>
-            {(() => {
-              if (infoTextRef.current) {
-                infoTextRef.current.innerHTML = info.text;
-              }
-            })()}
-          </p>
-          <p>~{info.source}</p>
+          <Scroll style={{height: "60vh"}}>
+            <p ref={infoTextRef}>
+              loading...
+              {(() => {
+                if (infoTextRef.current) {
+                  infoTextRef.current.innerHTML = info.text;
+                }
+              })()}
+            </p>
+            <p>~{info.source}</p>
+          </Scroll>
         </Modal.Body>
+        <Modal.Footer>
+          <Button variant='secondary' onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
       </Modal>
 
       <img
