@@ -17,7 +17,7 @@ function Header() {
   } = headerProps;
 
   return (
-    <header className='App-header'>
+    <div>
       <Stack gap={2}>
         <div className='d-flex gap-2 justify-center align-items-center'>
           <h1 className='display-4'>Quran</h1>
@@ -34,7 +34,7 @@ function Header() {
           orderChangeHandler={orderChangeHandler}
         />
       </Stack>
-    </header>
+    </div>
   );
 }
 

@@ -8,7 +8,7 @@ class App extends Component {
 
   render() {
     return (
-      <Col md={6} className='mx-auto mt-5'>
+      <Col md={6} className='mx-auto mt-2'>
         <Outlet />
       </Col>
     );

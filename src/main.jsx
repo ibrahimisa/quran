@@ -7,7 +7,6 @@ import ChapterView from './components/ChapterView';
 import Home from './components/Home'
 
 ReactDOM.render(
-  <React.StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<App />}>
@@ -15,11 +14,6 @@ ReactDOM.render(
           <Route path=':chapterId' element={<ChapterView />} />
         </Route>
       </Routes>
-    </BrowserRouter>
-  </React.StrictMode>,
+    </BrowserRouter>,
   document.getElementById('root')
 );
-
-if("serviceWorker" in navigator){
-  // navigator.serviceWorker.register("/sw.js")
-}

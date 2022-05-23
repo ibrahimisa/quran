@@ -49,11 +49,13 @@ class Home extends React.Component {
   cityChangeHandler = (e) => {
     this.setState({ city: e.target.value }, () => {
       const city = this.state.city.toLocaleLowerCase();
-      let chapters = this.state.chapters.slice();
+      let chapters
       if (city !== 'all') {
-        chapters = chapters.filter(
+        chapters = this.allChapters.filter(
           (chapter) => chapter.revelation_place.toLowerCase() === city
         );
+      } else{
+        chapters = this.allChapters
       }
 
       this.setState({ chapters });
