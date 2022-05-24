@@ -10,7 +10,7 @@ function Chapter({ id, name, englishName, versesCount, place }) {
     <div className='chapter bg-light my-1 p-3 border border-1 border-dark rounded' style={{ 
       position: 'relative'
     }}>
-      <Link to={`/quran/${id}`} className='d-flex align-items-center gap-3'>
+      <Link to={`/${id}`} className='d-flex align-items-center gap-3'>
         <h2>{id}</h2>
         <div>
           <h3 className='display-5 fs-4'>
