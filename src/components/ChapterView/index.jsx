@@ -52,7 +52,7 @@ function ChapterView() {
 
   return (
     <div>
-      <Link to='/'>
+      <Link to='/quran'>
         <img
           src={backArrow}
           alt='back to home arrow'
