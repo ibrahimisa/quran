@@ -9,7 +9,7 @@ import Home from './components/Home'
 ReactDOM.render(
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<App />}>
+        <Route path='/quran' element={<App />}>
           <Route index element={<Home />} />
           <Route path=':chapterId' element={<ChapterView />} />
         </Route>
